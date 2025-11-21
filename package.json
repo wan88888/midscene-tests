@@ -1,0 +1,38 @@
+{
+  "name": "midscene-tests",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Midscene.js automated testing suite for web, Android, iOS, and games",
+  "type": "module",
+  "scripts": {
+    "test": "vitest",
+    "test:all": "vitest --run tests/",
+    "test:web": "vitest --run tests/web/",
+    "test:android": "vitest --run tests/android/",
+    "test:ios": "vitest --run tests/ios/",
+    "test:fbgame": "vitest --run tests/fbgame/",
+    "test:ui": "vitest --ui",
+    "test:cache": "cross-env MIDSCENE_CACHE=true vitest --run",
+    "setup:esim-auth": "vitest run tests/web/esim/login.test.ts"
+  },
+  "author": "",
+  "license": "MIT",
+  "overrides": {
+    "axios": "^1.11.1",
+    "form-data": "^4.0.4",
+    "esbuild": "^0.25.0"
+  },
+  "devDependencies": {
+    "@midscene/android": "latest",
+    "@midscene/ios": "latest",
+    "@midscene/web": "latest",
+    "@playwright/test": "^1.56.1",
+    "@types/node": "~22.7.9",
+    "cross-env": "7.0.3",
+    "dotenv": "^16.4.5",
+    "playwright": "^1.56.1",
+    "typescript": "~5.6.3",
+    "vitest": "^2.1.8"
+  }
+}
+
