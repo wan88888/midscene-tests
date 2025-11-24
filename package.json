@@ -12,8 +12,7 @@
     "test:ios": "vitest --run tests/ios/",
     "test:fbgame": "vitest --run tests/fbgame/",
     "test:ui": "vitest --ui",
-    "test:cache": "cross-env MIDSCENE_CACHE=true vitest --run",
-    "setup:esim-auth": "vitest run tests/web/esim/login.test.ts"
+    "test:cache": "cross-env MIDSCENE_CACHE=true vitest --run"
   },
   "author": "",
   "license": "MIT",
@@ -35,4 +34,3 @@
     "vitest": "^2.1.8"
   }
 }
-

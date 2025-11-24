@@ -9,7 +9,7 @@ vi.setConfig({
 });
 
 const pageUrl = "https://esimnum.com/home";
-describe("Test eSIM Login", () => {
+describe("Test eSIM Select", () => {
   let agent: PlaywrightAgent;
 
   beforeAll(async () => {
@@ -30,8 +30,14 @@ describe("Test eSIM Login", () => {
     };
   });
 
-  it("ai esim login", async () => {
-    await agent.ai("Click Login button");
-    await agent.ai("Click Continue with Google");
+  it("ai esim select", async () => {
+    await agent.aiScroll({
+      direction: 'up',
+      distance: 100,
+      scrollType: 'once',
+    });
+    await agent.ai("Click See all destination");
+    await agent.ai("Click Australia");
+    await agent.ai("Click the Buy button on the page");
   });
 });

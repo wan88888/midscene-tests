@@ -4,7 +4,6 @@ import 'dotenv/config';
 
 vi.setConfig({
   testTimeout: 90 * 1000,
-  hookTimeout: 60 * 1000,
 });
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));

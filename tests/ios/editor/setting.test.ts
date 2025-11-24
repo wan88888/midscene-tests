@@ -6,7 +6,6 @@ import 'dotenv/config'; // read environment variables from .env file
 
 vi.setConfig({
   testTimeout: 90 * 1000,
-  hookTimeout: 60 * 1000,
 });
 
 describe(
