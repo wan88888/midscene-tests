@@ -7,6 +7,8 @@ node_modules/
 
 # Test outputs
 midscene_run/
+.surge-temp/
+.surge-send-lock
 
 # Authentication state files (sensitive data)
 *-auth-state.json

@@ -12,7 +12,8 @@
     "test:ios": "vitest --run tests/ios/",
     "test:fbgame": "vitest --run tests/fbgame/",
     "test:ui": "vitest --ui",
-    "test:cache": "cross-env MIDSCENE_CACHE=true vitest --run"
+    "test:cache": "cross-env MIDSCENE_CACHE=true vitest --run",
+    "send-report": "tsx scripts/send-feishu-report.ts"
   },
   "author": "",
   "license": "MIT",
@@ -30,6 +31,7 @@
     "cross-env": "7.0.3",
     "dotenv": "^16.4.5",
     "playwright": "^1.56.1",
+    "tsx": "^4.19.2",
     "typescript": "~5.6.3",
     "vitest": "^2.1.8"
   }
