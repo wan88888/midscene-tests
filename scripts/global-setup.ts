@@ -17,6 +17,11 @@ export default async function globalSetup() {
   
   // Return a teardown function that will run after all tests
   return async () => {
+    // 检查是否禁用通知（用于调试）
+    if (process.env.DISABLE_FEISHU_NOTIFY === 'true') {
+      console.log('📤 Feishu notification disabled (DISABLE_FEISHU_NOTIFY=true)');
+      return;
+    }
     // 检查是否已经运行过
     if (hasRun || fs.existsSync(lockFile)) {
       console.log('📤 Feishu notification already sent, skipping...');

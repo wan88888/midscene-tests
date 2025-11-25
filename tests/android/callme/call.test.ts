@@ -16,14 +16,13 @@ describe(
           'If any location, permission, user agreement, etc. popup, click agree. If login page pops up, close it.',
       });
 
-      await agent.launch('com.android.settings/.Settings');
-
-      await agent.aiAction('scroll list to bottom');
-      await agent.aiAction('open "More settings"');
-      await agent.aiAction('scroll list to bottom');
-      await agent.aiAction('scroll list to top');
-      await agent.aiAction('swipe down one screen');
-      await agent.aiAction('swipe up one screen');
+      await agent.launch('');
+      await agent.ai('点击中间键盘按钮');
+      await agent.ai('输入号码6502234107');
+      await agent.ai('点击键盘上的电话按钮');
+      await agent.ai('点击结束通话按钮');
+      await agent.ai('点击返回按钮');
+      await agent.aiAssert('Call界面应该会出现通话记录');
     });
   },
   360 * 1000,

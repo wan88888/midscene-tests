@@ -11,6 +11,7 @@ midscene_run/
 .surge-send-lock
 
 # Authentication state files (sensitive data)
+.auth/
 *-auth-state.json
 fb-auth-state.json
 
