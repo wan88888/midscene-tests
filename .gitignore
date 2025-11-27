@@ -38,5 +38,3 @@ build/
 *.png
 *.jpg
 *.jpeg
-!tests/**/*.png
-!tests/**/*.jpg
