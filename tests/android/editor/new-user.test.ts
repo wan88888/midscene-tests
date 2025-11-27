@@ -16,7 +16,7 @@ describe(
           'If any location, permission, user agreement, etc. popup, click agree. If login page pops up, close it.',
       });
 
-      await agent.launch('vidma.video.editor.videomaker/com.atlasv.android.mvmaker.mveditor.LaunchActivity');
+      await agent.launch(process.env.ANDROID_EDITOR_PACKAGE || '');
       await agent.ai('Click NEXT');
       await agent.ai('Click NEXT');
       await agent.ai('Click NEXT');

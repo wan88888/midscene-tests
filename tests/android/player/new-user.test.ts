@@ -16,7 +16,7 @@ describe(
           'If any location, permission, user agreement, etc. popup, click agree. If login page pops up, close it.',
       });
 
-      await agent.launch('');
+      await agent.launch(process.env.ANDROID_PLAYER_PACKAGE || '');
       await agent.ai('Click Allow all');
       await agent.ai('Click the 1st video in the video list');
       await agent.ai('Click Skip');

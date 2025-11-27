@@ -17,7 +17,7 @@ describe(
           'If any location, permission, click agree.',
       });
       
-      await agent.launch('');          
+      await agent.launch(process.env.IOS_TEXTNUM_BUNDLE_ID || '');          
       await agent.ai('Click Contacts Tab');
       await agent.ai('Click the new button next to it');
       await agent.ai('Click the avatar area');

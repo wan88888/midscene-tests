@@ -17,7 +17,7 @@ describe(
           'If any location, permission, click agree.',
       });
       
-      await agent.launch('');          
+      await agent.launch(process.env.IOS_EDITOR_BUNDLE_ID || '');          
       await agent.ai('Click the close button');
       await agent.ai('Click Allow');
       await agent.ai('Click Allow');

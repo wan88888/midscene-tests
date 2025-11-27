@@ -16,7 +16,7 @@ describe(
           'If any location, permission, user agreement, etc. popup, click agree. If login page pops up, close it.',
       });
 
-      await agent.launch('');
+      await agent.launch(process.env.ANDROID_RECORDER_PACKAGE || '');
       await agent.ai('Click the edit button of the 1st recording');
       await agent.ai('Click blank area');
       await agent.ai('Click the close button at the top');

@@ -16,7 +16,7 @@ describe(
           'If any location, permission, user agreement, etc. popup, click agree. If login page pops up, close it.',
       });
 
-      await agent.launch('');
+      await agent.launch(process.env.ANDROID_RECORDER_PACKAGE || '');
       await agent.ai('Click Audio');
       await agent.ai('Click Internal Audio and Microphone');
       await agent.ai('Click the back button');
@@ -31,10 +31,10 @@ describe(
       await agent.ai('Click the middle record button');
       await agent.ai('Click Start now');
       await agent.ai('Pull down notification bar');
-      await agent.launch('');
-      await agent.launch('');
+      await agent.launch(process.env.ANDROID_YOUTUBE_PACKAGE || '');
+      await agent.launch(process.env.ANDROID_RECORDER_PACKAGE || '');
       await agent.ai('Click the 1st video');
-      await agent.launch('');
+      await agent.launch(process.env.ANDROID_RECORDER_PACKAGE || '');
       await agent.ai('Click the end recording button');
       await agent.ai('Click the close button on result page');
     });

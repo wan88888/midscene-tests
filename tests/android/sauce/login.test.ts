@@ -18,7 +18,7 @@ describe(
           'If any location, permission, user agreement, etc. popup, click agree.',
       });
 
-      await agent.launch('com.swaglabsmobileapp/com.swaglabsmobileapp.MainActivity');
+      await agent.launch(process.env.ANDROID_SAUCE_PACKAGE || '');
       await sleep(3000);
       await agent.ai('Type standard_user in the Username field');
       await agent.ai('Type secret_sauce in the Password field');

@@ -17,7 +17,7 @@ describe(
           'If any location, permission, click agree.',
       });
       
-      await agent.launch('');          
+      await agent.launch(process.env.IOS_TEXTNUM_BUNDLE_ID || '');          
       await agent.ai('Click Call Tab');
       await agent.ai('Click the keyboard button next to it');
       await agent.ai('Enter phone number 6502234107');

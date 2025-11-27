@@ -17,7 +17,7 @@ describe(
           'If any location, permission, click agree.',
       });
       
-      await agent.launch('');
+      await agent.launch(process.env.IOS_EDITOR_BUNDLE_ID || '');
       await agent.ai('Click AI Lab');
       await agent.ai('Click Text to Video');
       await agent.ai('Enter text in the input field: Do you also want to dance?');

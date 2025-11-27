@@ -16,7 +16,7 @@ describe(
           'If any location, permission, user agreement, etc. popup, click agree. If login page pops up, close it.',
       });
 
-      await agent.launch('free.video.downloader.converter.music/free.video.downloader.converter.music.view.activity.StartupActivity');
+      await agent.launch(process.env.ANDROID_DOWNLOADER_PACKAGE || '');
       await agent.ai('Click Allow');
       await agent.ai('Click the close button');
       await agent.ai('Click the VIP button at the top');

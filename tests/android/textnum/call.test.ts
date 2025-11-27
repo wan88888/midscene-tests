@@ -16,7 +16,7 @@ describe(
           'If any location, permission, user agreement, etc. popup, click agree. If login page pops up, close it.',
       });
 
-      await agent.launch('');
+      await agent.launch(process.env.ANDROID_TEXTNUM_PACKAGE || '');
       await agent.ai('Click Call Tab');
       await agent.ai('Enter phone number 6502234107');
       await agent.ai('Click the phone button on the keyboard');

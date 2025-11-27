@@ -17,7 +17,7 @@ describe(
           'If any location, permission, click agree.',
       });
       
-      await agent.launch('');          
+      await agent.launch(process.env.IOS_TEXTNUM_BUNDLE_ID || '');          
       await agent.ai('Click the new button next to it');
       await agent.ai('Enter 6502234107 in the number input field');
       await agent.ai('Enter hey in the chat input field');

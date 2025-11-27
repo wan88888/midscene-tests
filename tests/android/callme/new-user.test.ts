@@ -16,7 +16,7 @@ describe(
           'If any location, permission, user agreement, etc. popup, click agree. If login page pops up, close it.',
       });
 
-      await agent.launch('');
+      await agent.launch(process.env.ANDROID_CALLME_PACKAGE || '');
       await agent.ai('Click Become a Member Now');
       await agent.ai('Click Gold');
       await agent.ai('Click Monthly Plan');

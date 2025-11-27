@@ -16,7 +16,7 @@ describe(
           'If any location, permission, user agreement, etc. popup, click agree. If login page pops up, close it.',
       });
 
-      await agent.launch('');
+      await agent.launch(process.env.ANDROID_TEXTNUM_PACKAGE || '');
       await agent.ai('Click Get a Number Now');
       await agent.ai('Click the close button in the top left corner');
       await agent.ai('Click No,Thanks');

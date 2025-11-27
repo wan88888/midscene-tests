@@ -16,7 +16,7 @@ describe(
           'If any location, permission, user agreement, etc. popup, click agree. If login page pops up, close it.',
       });
 
-      await agent.launch('');
+      await agent.launch(process.env.ANDROID_CALLME_PACKAGE || '');
       await agent.ai('Click Message Tab');
       await agent.ai('Click the new chat button');
       await agent.ai('Enter 6502234107 in the number input field');

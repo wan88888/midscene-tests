@@ -17,7 +17,7 @@ describe(
           'If any location, permission, click agree.',
       });
       
-      await agent.launch('');          
+      await agent.launch(process.env.IOS_TEXTNUM_BUNDLE_ID || '');          
       await agent.ai('Click Settings Tab');
       await agent.ai('Click New Number area');
       await agent.ai('Click Browse by State');

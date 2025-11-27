@@ -17,7 +17,7 @@ describe(
           'If any location, permission, click agree.',
       });
       
-      await agent.launch('com.apple.mobilemail');          
+      await agent.launch(process.env.IOS_MAIL_BUNDLE_ID || '');          
       await agent.ai('Click Other');
       await agent.ai('Type test in the Name field');
       await agent.ai('Type test in the Description field');

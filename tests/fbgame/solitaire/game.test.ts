@@ -18,7 +18,7 @@ describe(
           'If any location, permission, user agreement, etc. popup, click agree.',
       });
 
-      await agent.launch('com.facebook.katana/com.facebook.katana.LoginActivity');
+      await agent.launch(process.env.ANDROID_FACEBOOK_PACKAGE || '');
       await sleep(3000);
       await agent.ai('Click Game Tab');
       await agent.ai('Click Solitaire game');
