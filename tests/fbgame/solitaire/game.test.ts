@@ -1,5 +1,5 @@
 import { agentFromAdbDevice, getConnectedDevices } from '@midscene/android';
-import { describe, it, vi } from 'vitest';
+import { describe, it, vi, afterAll } from 'vitest';
 import 'dotenv/config';
 
 vi.setConfig({
@@ -8,12 +8,18 @@ vi.setConfig({
 
 const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
 
+let agent: Awaited<ReturnType<typeof agentFromAdbDevice>> | null = null;
+
 describe(
   'Facebook Solitaire Game Tests',
   async () => {
+    afterAll(async () => {
+      await agent?.destroy();
+    });
+
     await it('should play solitaire game', async () => {
       const devices = await getConnectedDevices();
-      const agent = await agentFromAdbDevice(devices[0].udid,{
+      agent = await agentFromAdbDevice(devices[0].udid, {
         aiActionContext:
           'If any location, permission, user agreement, etc. popup, click agree.',
       });

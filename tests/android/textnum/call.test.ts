@@ -1,17 +1,23 @@
 import { agentFromAdbDevice, getConnectedDevices } from '@midscene/android';
-import { describe, it, vi } from 'vitest';
+import { describe, it, vi, afterAll } from 'vitest';
 import 'dotenv/config';
 
 vi.setConfig({
   testTimeout: 360 * 1000,
 });
 
+let agent: Awaited<ReturnType<typeof agentFromAdbDevice>> | null = null;
+
 describe(
   'Android TextNum Tests',
   async () => {
+    afterAll(async () => {
+      await agent?.destroy();
+    });
+
     await it('should make a phone call', async () => {
       const devices = await getConnectedDevices();
-      const agent = await agentFromAdbDevice(devices[0].udid,{
+      agent = await agentFromAdbDevice(devices[0].udid, {
         aiActionContext:
           'If any location, permission, user agreement, etc. popup, click agree. If login page pops up, close it.',
       });

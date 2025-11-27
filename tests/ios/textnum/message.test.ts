@@ -1,16 +1,22 @@
 import { agentFromWebDriverAgent } from '@midscene/ios';
-import { describe, it, vi } from 'vitest';
+import { describe, it, vi, afterAll } from 'vitest';
 import 'dotenv/config';
 
 vi.setConfig({
   testTimeout: 360 * 1000,
 });
 
+let agent: Awaited<ReturnType<typeof agentFromWebDriverAgent>> | null = null;
+
 describe(
   'iOS TextNum Tests',
   async () => {
+    afterAll(async () => {
+      await agent?.destroy();
+    });
+
     await it('should send a message', async () => {
-      const agent = await agentFromWebDriverAgent({
+      agent = await agentFromWebDriverAgent({
         aiActionContext:
           'If any location, permission, click agree.',
       });

@@ -1,5 +1,5 @@
-import { describe, it, vi, beforeAll } from 'vitest';
-import { chromium } from 'playwright';
+import { describe, it, vi, beforeAll, afterAll } from 'vitest';
+import { chromium, Browser } from 'playwright';
 import { PlaywrightAgent } from '@midscene/web/playwright';
 import 'dotenv/config';
 
@@ -9,11 +9,13 @@ vi.setConfig({
 });
 
 const pageUrl = 'https://esimnum.com/home';
+
 describe('Web eSIM Tests', () => {
+  let browser: Browser;
   let agent: PlaywrightAgent;
 
   beforeAll(async () => {
-    const browser = await chromium.launch({
+    browser = await chromium.launch({
       headless: false,
       args: ['--start-maximized'],
     });
@@ -24,10 +26,10 @@ describe('Web eSIM Tests', () => {
     await page.goto(pageUrl);
     await page.waitForLoadState('networkidle');
     agent = new PlaywrightAgent(page);
+  });
 
-    return () => {
-      browser.close();
-    };
+  afterAll(async () => {
+    await browser?.close();
   });
 
   it('should search and buy eSIM', async () => {

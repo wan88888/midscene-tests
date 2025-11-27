@@ -1,5 +1,5 @@
-import { describe, it, vi, beforeAll } from 'vitest';
-import { chromium } from 'playwright';
+import { describe, it, vi, beforeAll, afterAll } from 'vitest';
+import { chromium, Browser } from 'playwright';
 import { PlaywrightAgent } from '@midscene/web/playwright';
 import 'dotenv/config';
 
@@ -9,11 +9,13 @@ vi.setConfig({
 });
 
 const pageUrl = 'https://www.saucedemo.com';
+
 describe('Web Sauce Demo Tests', () => {
+  let browser: Browser;
   let agent: PlaywrightAgent;
 
   beforeAll(async () => {
-    const browser = await chromium.launch({
+    browser = await chromium.launch({
       headless: false,
       args: ['--start-maximized'],
     });
@@ -24,10 +26,10 @@ describe('Web Sauce Demo Tests', () => {
     await page.goto(pageUrl);
     await page.waitForLoadState('networkidle');
     agent = new PlaywrightAgent(page);
+  });
 
-    return () => {
-      browser.close();
-    };
+  afterAll(async () => {
+    await browser?.close();
   });
 
   it('should login successfully', async () => {
