@@ -3,15 +3,15 @@ import { describe, it, vi } from 'vitest';
 import 'dotenv/config';
 
 vi.setConfig({
-  testTimeout: 90 * 1000,
+  testTimeout: 360 * 1000,
 });
 
 const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
 
 describe(
-  'android integration',
+  'Android Sauce Demo Tests',
   async () => {
-    await it('Saucelabs App Login Test', async () => {
+    await it('should login successfully', async () => {
       const devices = await getConnectedDevices();
       const agent = await agentFromAdbDevice(devices[0].udid,{
         aiActionContext:

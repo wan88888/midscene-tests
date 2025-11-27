@@ -1,19 +1,19 @@
-import { describe, it, vi, beforeAll } from "vitest";
-import { chromium } from "playwright";
-import path from "path";
-import fs from "fs";
-import "dotenv/config";
+import { describe, it, vi, beforeAll } from 'vitest';
+import { chromium } from 'playwright';
+import path from 'path';
+import fs from 'fs';
+import 'dotenv/config';
 
 vi.setConfig({
   testTimeout: 240 * 1000,
   hookTimeout: 60 * 1000,
 });
 
-const pageUrl = "https://www.saucedemo.com";
-const inventoryUrl = "https://www.saucedemo.com/inventory.html";
+const pageUrl = 'https://www.saucedemo.com';
+const inventoryUrl = 'https://www.saucedemo.com/inventory.html';
 const authFile = path.join(process.cwd(), '.auth', 'sauce-user.json');
 
-describe("Setup Sauce Auth", () => {
+describe('Web Sauce Auth Setup', () => {
   beforeAll(async () => {
     // 确保 .auth 目录存在
     const authDir = path.dirname(authFile);
@@ -22,10 +22,10 @@ describe("Setup Sauce Auth", () => {
     }
   });
 
-  it("should login and save auth state", async () => {
+  it('should login and save auth state', async () => {
     const browser = await chromium.launch({
       headless: false,
-      args: ["--start-maximized"],
+      args: ['--start-maximized'],
     });
 
     const context = await browser.newContext({

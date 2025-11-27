@@ -1,19 +1,19 @@
-import { describe, it, vi, beforeAll, afterAll } from "vitest";
-import { chromium, Browser } from "playwright";
-import { PlaywrightAgent } from "@midscene/web/playwright";
-import path from "path";
-import fs from "fs";
-import "dotenv/config";
+import { describe, it, vi, beforeAll, afterAll } from 'vitest';
+import { chromium, Browser } from 'playwright';
+import { PlaywrightAgent } from '@midscene/web/playwright';
+import path from 'path';
+import fs from 'fs';
+import 'dotenv/config';
 
 vi.setConfig({
   testTimeout: 240 * 1000,
   hookTimeout: 60 * 1000,
 });
 
-const inventoryUrl = "https://www.saucedemo.com/inventory.html";
+const inventoryUrl = 'https://www.saucedemo.com/inventory.html';
 const authFile = path.join(process.cwd(), '.auth', 'sauce-user.json');
 
-describe("Test Sauce Add to Cart", () => {
+describe('Web Sauce Demo Tests', () => {
   let browser: Browser;
   let agent: PlaywrightAgent;
 
@@ -28,7 +28,7 @@ describe("Test Sauce Add to Cart", () => {
 
     browser = await chromium.launch({
       headless: false,
-      args: ["--start-maximized"],
+      args: ['--start-maximized'],
     });
     
     // 使用保存的登录状态

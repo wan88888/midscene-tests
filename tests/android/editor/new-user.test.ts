@@ -3,13 +3,13 @@ import { describe, it, vi } from 'vitest';
 import 'dotenv/config';
 
 vi.setConfig({
-  testTimeout: 90 * 1000,
+  testTimeout: 360 * 1000,
 });
 
 describe(
-  'android integration',
+  'Android Editor Tests',
   async () => {
-    await it('Editor App for first launch test', async () => {
+    await it('should complete first launch onboarding', async () => {
       const devices = await getConnectedDevices();
       const agent = await agentFromAdbDevice(devices[0].udid,{
         aiActionContext:

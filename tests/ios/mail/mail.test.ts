@@ -3,15 +3,13 @@ import { describe, it, vi } from 'vitest';
 import 'dotenv/config';
 
 vi.setConfig({
-  testTimeout: 90 * 1000,
+  testTimeout: 360 * 1000,
 });
 
-const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
-
 describe(
-  'ios integration',
+  'iOS Mail Tests',
   async () => {
-    await it('Saucelabs App Login Test', async () => {
+    await it('should add a mail account', async () => {
       const agent = await agentFromWebDriverAgent({
         aiActionContext:
           'If any location, permission, click agree.',

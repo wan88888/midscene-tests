@@ -1,21 +1,21 @@
-import { describe, it, vi, beforeAll } from "vitest";
-import { chromium } from "playwright";
-import { PlaywrightAgent } from "@midscene/web/playwright";
-import "dotenv/config";
+import { describe, it, vi, beforeAll } from 'vitest';
+import { chromium } from 'playwright';
+import { PlaywrightAgent } from '@midscene/web/playwright';
+import 'dotenv/config';
 
 vi.setConfig({
   testTimeout: 240 * 1000,
   hookTimeout: 60 * 1000,
 });
 
-const pageUrl = "https://esimnum.com/home";
-describe("Test eSIM Login", () => {
+const pageUrl = 'https://esimnum.com/home';
+describe('Web eSIM Tests', () => {
   let agent: PlaywrightAgent;
 
   beforeAll(async () => {
     const browser = await chromium.launch({
       headless: false,
-      args: ["--start-maximized"],
+      args: ['--start-maximized'],
     });
     const context = await browser.newContext({
       viewport: null,
@@ -30,7 +30,7 @@ describe("Test eSIM Login", () => {
     };
   });
 
-  it('ai esim login', async () => {
+  it('should login with Google', async () => {
     await agent.ai('Click Login button');
     await agent.ai('Click Continue with Google');
   });

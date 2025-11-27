@@ -1,21 +1,21 @@
-import { describe, it, vi, beforeAll } from "vitest";
-import { chromium } from "playwright";
-import { PlaywrightAgent } from "@midscene/web/playwright";
-import "dotenv/config";
+import { describe, it, vi, beforeAll } from 'vitest';
+import { chromium } from 'playwright';
+import { PlaywrightAgent } from '@midscene/web/playwright';
+import 'dotenv/config';
 
 vi.setConfig({
   testTimeout: 240 * 1000,
   hookTimeout: 60 * 1000,
 });
 
-const pageUrl = "https://www.saucedemo.com";
-describe("Test Sauce Login", () => {
+const pageUrl = 'https://www.saucedemo.com';
+describe('Web Sauce Demo Tests', () => {
   let agent: PlaywrightAgent;
 
   beforeAll(async () => {
     const browser = await chromium.launch({
       headless: false,
-      args: ["--start-maximized"],
+      args: ['--start-maximized'],
     });
     const context = await browser.newContext({
       viewport: null,
@@ -30,7 +30,7 @@ describe("Test Sauce Login", () => {
     };
   });
 
-  it('ai sauce login', async () => {
+  it('should login successfully', async () => {
     await agent.ai('Type standard_user in the Username field');
     await agent.ai('Type secret_sauce in the Password field');
     await agent.ai('Click the Login button');

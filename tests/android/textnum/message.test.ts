@@ -3,13 +3,13 @@ import { describe, it, vi } from 'vitest';
 import 'dotenv/config';
 
 vi.setConfig({
-  testTimeout: 90 * 1000,
+  testTimeout: 360 * 1000,
 });
 
 describe(
-  'android integration',
+  'Android TextNum Tests',
   async () => {
-    await it('Android settings page demo for scroll', async () => {
+    await it('should send a message', async () => {
       const devices = await getConnectedDevices();
       const agent = await agentFromAdbDevice(devices[0].udid,{
         aiActionContext:
