@@ -17,18 +17,18 @@ describe(
       });
 
       await agent.launch('');
-      await agent.ai('点击Message Tab');
-      await agent.ai('在号码输入框输入6502234107');
-      await agent.ai('在聊天输入框输入hey');
-      await agent.ai('点击Send按钮');
-      await agent.ai('点击左下角相册按钮');
-      await agent.ai('点击Photos');
-      await agent.ai('选择第1张图片');
-      await agent.ai('点击评星弹窗关闭按钮');
-      await agent.ai('点击左上角返回按钮');
-      await agent.ai('点击History Tab');
-      await agent.ai('点击Message Tab');
-      await agent.aiAssert('Message Tab应该会出现聊天记录');
+      await agent.ai('Click Message Tab');
+      await agent.ai('Enter 6502234107 in the number input field');
+      await agent.ai('Enter hey in the chat input field');
+      await agent.ai('Click Send button');
+      await agent.ai('Click the photo button at the bottom left');
+      await agent.ai('Click Photos');
+      await agent.ai('Select the 1st image');
+      await agent.ai('Click rating popup close button');
+      await agent.ai('Click the back button at the top left');
+      await agent.ai('Click History Tab');
+      await agent.ai('Click Message Tab');
+      await agent.aiAssert('Chat record should appear in Message Tab');
     });
   },
   360 * 1000,

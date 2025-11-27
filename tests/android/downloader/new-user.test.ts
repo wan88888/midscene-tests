@@ -17,21 +17,21 @@ describe(
       });
 
       await agent.launch('free.video.downloader.converter.music/free.video.downloader.converter.music.view.activity.StartupActivity');
-      await agent.ai('点击Allow');
-      await agent.ai('点击关闭按钮');
-      await agent.ai('点击顶部VIP按钮');
-      await agent.ai('点击Monthly Access');
-      await agent.ai('点击7 Days Free Trial按钮');
-      await agent.ai('点击购买按钮');
-      await agent.ai('点击输入框输入pornhub.com');
-      await agent.ai('点击Enter按钮');
-      await agent.ai('点击第1个视频');
-      await agent.ai('等待悬浮按钮亮起');
-      await agent.ai('点击悬浮下载按钮');
-      await agent.ai('选择720p');
-      await agent.ai('点击Download按钮');
-      await agent.ai('点击右上角关闭按钮');
-      await agent.ai('点击底部Home按钮');
+      await agent.ai('Click Allow');
+      await agent.ai('Click the close button');
+      await agent.ai('Click the VIP button at the top');
+      await agent.ai('Click Monthly Access');
+      await agent.ai('Click 7 Days Free Trial button');
+      await agent.ai('Click the purchase button');
+      await agent.ai('Enter pornhub.com in the input field');
+      await agent.ai('Click Enter button');
+      await agent.ai('Click the 1st video');
+      await agent.ai('Wait for the floating button to light up');
+      await agent.ai('Click the floating download button');
+      await agent.ai('Select 720p');
+      await agent.ai('Click Download button');
+      await agent.ai('Click the close button in the top right corner');
+      await agent.ai('Click the Home button at the bottom');
     });
   },
   360 * 1000,

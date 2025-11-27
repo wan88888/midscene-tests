@@ -17,26 +17,26 @@ describe(
       });
 
       await agent.launch('');
-      await agent.ai('点击Get a Number Now');
-      await agent.ai('点击左上角关闭按钮');
-      await agent.ai('点击No,Thanks');
-      await agent.ai('点击Get Number');
-      await agent.ai('点击Monthly');
-      await agent.ai('点击CONTINUE');
-      await agent.ai('点击Subscribe');
-      await agent.ai('点击Browse by State');
-      await agent.ai('点击United States');
-      await agent.ai('在搜索输入框输入213');
-      await agent.ai('点击搜索结果第1个');
-      await agent.ai('点击Done按钮');
-      await agent.ai('点击第1个号码');
-      await agent.ai('点击Get This Number');
-      await agent.ai('点击Done按钮');
-      await agent.ai('点击Accept按钮');
-      await agent.ai('点击左上角关闭按钮');
-      await agent.ai('点击While using the app');
-      await agent.ai('点击Allow按钮');
-      await agent.ai('点击Allow按钮');
+      await agent.ai('Click Get a Number Now');
+      await agent.ai('Click the close button in the top left corner');
+      await agent.ai('Click No,Thanks');
+      await agent.ai('Click Get Number');
+      await agent.ai('Click Monthly');
+      await agent.ai('Click CONTINUE');
+      await agent.ai('Click Subscribe');
+      await agent.ai('Click Browse by State');
+      await agent.ai('Click United States');
+      await agent.ai('Enter 213 in the search input field');
+      await agent.ai('Click the 1st search result');
+      await agent.ai('Click Done button');
+      await agent.ai('Click the 1st number');
+      await agent.ai('Click Get This Number');
+      await agent.ai('Click Done button');
+      await agent.ai('Click Accept button');
+      await agent.ai('Click the close button in the top left corner');
+      await agent.ai('Click While using the app');
+      await agent.ai('Click Allow button');
+      await agent.ai('Click Allow button');
     });
   },
   360 * 1000,

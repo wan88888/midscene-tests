@@ -18,10 +18,10 @@ describe(
       });
       
       await agent.launch('');          
-      await agent.ai("点击关闭按钮");
-      await agent.ai("点击Allow");
-      await agent.ai("点击Allow");
-      await agent.aiAssert('用户应该看到首页即页面存在New Project按钮');
+      await agent.ai('Click the close button');
+      await agent.ai('Click Allow');
+      await agent.ai('Click Allow');
+      await agent.aiAssert('User should see the home page with New Project button');
     });
   },
   360 * 1000,

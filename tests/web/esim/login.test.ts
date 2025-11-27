@@ -30,8 +30,8 @@ describe("Test eSIM Login", () => {
     };
   });
 
-  it("ai esim login", async () => {
-    await agent.ai("Click Login button");
-    await agent.ai("Click Continue with Google");
+  it('ai esim login', async () => {
+    await agent.ai('Click Login button');
+    await agent.ai('Click Continue with Google');
   });
 });

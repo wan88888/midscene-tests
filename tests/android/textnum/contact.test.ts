@@ -17,18 +17,18 @@ describe(
       });
 
       await agent.launch('');
-      await agent.ai('点击Contact Tab');
-      await agent.ai('点击右上角新建按钮');
-      await agent.ai('点击头像区域');
-      await agent.ai('选择第1张图片');
-      await agent.ai('点击Contact Name');
-      await agent.ai('在First Name输入框输入Lucy');
-      await agent.ai('点击OK');
-      await agent.ai('点击Add Number');
-      await agent.ai('在Phone Number输入框输入6502234107');
-      await agent.ai('点击OK');
-      await agent.ai('点击Done按钮');
-      await agent.aiAssert('From App Tab应该会出现联系人记录');
+      await agent.ai('Click Contact Tab');
+      await agent.ai('Click the new button in the top right corner');
+      await agent.ai('Click the avatar area');
+      await agent.ai('Select the 1st image');
+      await agent.ai('Click Contact Name');
+      await agent.ai('Enter Lucy in First Name input field');
+      await agent.ai('Click OK');
+      await agent.ai('Click Add Number');
+      await agent.ai('Enter 6502234107 in Phone Number input field');
+      await agent.ai('Click OK');
+      await agent.ai('Click Done button');
+      await agent.aiAssert('Contact record should appear in From App Tab');
     });
   },
   360 * 1000,

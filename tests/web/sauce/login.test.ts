@@ -30,10 +30,10 @@ describe("Test Sauce Login", () => {
     };
   });
 
-  it("ai sauce login", async () => {
-    await agent.ai("Type standard_user in the Username field");
-    await agent.ai("Type secret_sauce in the Password field");
-    await agent.ai("Click the Login button");
-    await agent.aiAssert("Page should contain Products text");
+  it('ai sauce login', async () => {
+    await agent.ai('Type standard_user in the Username field');
+    await agent.ai('Type secret_sauce in the Password field');
+    await agent.ai('Click the Login button');
+    await agent.aiAssert('Page should contain Products text');
   });
 });

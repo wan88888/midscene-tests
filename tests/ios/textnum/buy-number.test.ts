@@ -18,24 +18,24 @@ describe(
       });
       
       await agent.launch('');          
-      await agent.ai("点击Settings Tab");
-      await agent.ai("点击New Number区域");
-      await agent.ai("点击Browse by State");
-      await agent.ai("点击United States");
-      await agent.ai("在Search输入框输入213");
-      await agent.ai("点击出现的搜索结果");
-      await agent.ai("点击Done按钮");
-      await agent.ai("选择第1个号码");
-      await agent.ai("点击Get This Number按钮");
-      await agent.ai("点击Monthly");
-      await agent.ai("等待购买弹窗弹出");
-      await agent.ai("点击Subscribe按钮");
-      await agent.ai("在Password输入框输入Text0402");
-      await agent.ai("点击OK按钮");
-      await agent.ai("等待评星弹窗出现");
-      await agent.ai("点击Not Now");
-      await agent.ai("点击Done");
-      await agent.aiAssert("那么用户应该看到购买的号码");
+      await agent.ai('Click Settings Tab');
+      await agent.ai('Click New Number area');
+      await agent.ai('Click Browse by State');
+      await agent.ai('Click United States');
+      await agent.ai('Enter 213 in Search input field');
+      await agent.ai('Click the search result that appears');
+      await agent.ai('Click Done button');
+      await agent.ai('Select the 1st number');
+      await agent.ai('Click Get This Number button');
+      await agent.ai('Click Monthly');
+      await agent.ai('Wait for purchase popup to appear');
+      await agent.ai('Click Subscribe button');
+      await agent.ai('Enter Text0402 in Password input field');
+      await agent.ai('Click OK button');
+      await agent.ai('Wait for rating popup to appear');
+      await agent.ai('Click Not Now');
+      await agent.ai('Click Done');
+      await agent.aiAssert('User should see the purchased number');
     });
   },
   360 * 1000,

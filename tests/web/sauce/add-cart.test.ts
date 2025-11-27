@@ -48,17 +48,17 @@ describe("Test Sauce Add to Cart", () => {
     await browser.close();
   });
 
-  it("should already be logged in", async () => {
+  it('should already be logged in', async () => {
     // Verify logged in state - ensure auth state saving works
-    await agent.aiAssert("Page should contain Products text");
+    await agent.aiAssert('Page should contain Products text');
   });
 
-  it("should add item to cart successfully", async () => {
+  it('should add item to cart successfully', async () => {
     // Add item to cart - core shopping cart functionality
-    await agent.ai("Click the Add to cart button for Sauce Labs Backpack");
+    await agent.ai('Click the Add to cart button for Sauce Labs Backpack');
     
     // Verify cart icon shows item count
-    await agent.aiAssert("Shopping cart icon should display number 1");
+    await agent.aiAssert('Shopping cart icon should display number 1');
   });
 });
 

@@ -30,9 +30,9 @@ describe("Test eSIM Search", () => {
     };
   });
 
-  it("ai esim search", async () => {
-    await agent.ai("Type Brazil in the search bar");
-    await agent.ai("Click on the search result that appears");
-    await agent.ai("Click the Buy button on the page");
+  it('ai esim search', async () => {
+    await agent.ai('Type Brazil in the search bar');
+    await agent.ai('Click on the search result that appears');
+    await agent.ai('Click the Buy button on the page');
   });
 });

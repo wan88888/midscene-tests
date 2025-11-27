@@ -17,20 +17,20 @@ describe(
       });
 
       await agent.launch('');
-      await agent.ai('点击Become a Member Now');
-      await agent.ai('点击Gold');
-      await agent.ai('点击Monthly Plan');
-      await agent.ai('点击Subscribe按钮');
-      await agent.aiAssert('用户应该看到号码管理页即页面出现Dear Gold Member文案');
-      await agent.ai('点击Number1下方的+按钮');
-      await agent.ai('点击Search输入框');
-      await agent.ai('点击United States');
-      await agent.ai('在Search输入框输入215');
-      await agent.ai('点击搜索结果第1个');
-      await agent.ai('点击搜索结果第1个');
-      await agent.ai('点击第1个号码');
-      await agent.ai('点击Get This Number');
-      await agent.ai('点击Continue按钮');
+      await agent.ai('Click Become a Member Now');
+      await agent.ai('Click Gold');
+      await agent.ai('Click Monthly Plan');
+      await agent.ai('Click Subscribe button');
+      await agent.aiAssert('User should see number management page with Dear Gold Member text');
+      await agent.ai('Click the + button below Number1');
+      await agent.ai('Click Search input field');
+      await agent.ai('Click United States');
+      await agent.ai('Enter 215 in Search input field');
+      await agent.ai('Click the 1st search result');
+      await agent.ai('Click the 1st search result');
+      await agent.ai('Click the 1st number');
+      await agent.ai('Click Get This Number');
+      await agent.ai('Click Continue button');
     });
   },
   360 * 1000,

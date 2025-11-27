@@ -17,14 +17,14 @@ describe(
       });
 
       await agent.launch('vidma.video.editor.videomaker/com.atlasv.android.mvmaker.mveditor.LaunchActivity');
-      await agent.ai('点击NEXT');
-      await agent.ai('点击NEXT');
-      await agent.ai('点击NEXT');
-      await agent.aiAssert('用户应该可以看到开屏导购页即页面存在Vidma Club Elite文案');
-      await agent.ai('点击关闭按钮');
-      await agent.aiAssert('用户应该可以看到挽回导购页即页面存在TODAY文案');
-      await agent.ai('点击关闭按钮');
-      await agent.aiAssert('用户应该看到首页即页面存在New Project按钮');
+      await agent.ai('Click NEXT');
+      await agent.ai('Click NEXT');
+      await agent.ai('Click NEXT');
+      await agent.aiAssert('User should see the onboarding purchase page with Vidma Club Elite text');
+      await agent.ai('Click the close button');
+      await agent.aiAssert('User should see the retention purchase page with TODAY text');
+      await agent.ai('Click the close button');
+      await agent.aiAssert('User should see the home page with New Project button');
     });
   },
   360 * 1000,

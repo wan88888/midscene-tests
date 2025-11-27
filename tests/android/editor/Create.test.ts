@@ -17,36 +17,36 @@ describe(
       });
 
       await agent.launch('vidma.video.editor.videomaker/com.atlasv.android.mvmaker.mveditor.LaunchActivity');
-      await agent.ai('点击New Project');
-      await agent.ai('点击Allow all');
-      await agent.ai('选择第1个视频');
-      await agent.ai('点击Next按钮');
-      await agent.ai('点击NEXT');
-      await agent.ai('点击OK');
-      await agent.ai('点击Effect');
-      await agent.ai('选择Strobe特效');
-      await agent.ai('点击✅');
-      await agent.ai('点击✅');
-      await agent.ai('点击Text');
-      await agent.ai('点击Add Text');
-      await agent.ai('选择Ripples');
-      await agent.ai('点击Aa');
-      await agent.ai('选择第2个选项');
-      await agent.ai('点击✅');
-      await agent.ai('点击空白位置');
+      await agent.ai('Click New Project');
+      await agent.ai('Click Allow all');
+      await agent.ai('Select the 1st video');
+      await agent.ai('Click Next button');
+      await agent.ai('Click NEXT');
+      await agent.ai('Click OK');
+      await agent.ai('Click Effect');
+      await agent.ai('Select Strobe effect');
+      await agent.ai('Click ✅');
+      await agent.ai('Click ✅');
+      await agent.ai('Click Text');
+      await agent.ai('Click Add Text');
+      await agent.ai('Select Ripples');
+      await agent.ai('Click Aa');
+      await agent.ai('Select the 2nd option');
+      await agent.ai('Click ✅');
+      await agent.ai('Click blank area');
       await agent.aiScroll(
         { direction: 'left', distance: 100, scrollType: 'once' },
-        '轨道区域',
+        'Track area',
       );
-      await agent.ai('点击Filter');
-      await agent.ai('选择PO3滤镜');
-      await agent.ai('点击✅');
-      await agent.ai('点击Export按钮');
-      await agent.ai('点击EXPORT');
-      await agent.ai('点击广告页面关闭按钮');
-      await agent.ai('关闭评星弹窗');
-      await agent.ai('点击右上角Home按钮');
-      await agent.aiAssert('用户应该回到Mine页面即页面存在Creation文案');
+      await agent.ai('Click Filter');
+      await agent.ai('Select PO3 filter');
+      await agent.ai('Click ✅');
+      await agent.ai('Click Export button');
+      await agent.ai('Click EXPORT');
+      await agent.ai('Click ad page close button');
+      await agent.ai('Close rating popup');
+      await agent.ai('Click the Home button in the top right corner');
+      await agent.aiAssert('User should return to Mine page with Creation text');
     });
   },
   360 * 1000,

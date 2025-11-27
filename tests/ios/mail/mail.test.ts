@@ -18,9 +18,9 @@ describe(
       });
       
       await agent.launch('com.apple.mobilemail');          
-      await agent.ai("Click Other");
-      await agent.ai("Type test in the Name field");
-      await agent.ai("Type test in the Description field");
+      await agent.ai('Click Other');
+      await agent.ai('Type test in the Name field');
+      await agent.ai('Type test in the Description field');
     });
   },
   360 * 1000,

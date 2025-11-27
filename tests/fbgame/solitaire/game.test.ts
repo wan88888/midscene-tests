@@ -20,10 +20,10 @@ describe(
 
       await agent.launch('com.facebook.katana/com.facebook.katana.LoginActivity');
       await sleep(3000);
-      await agent.ai("点击Game Tab");
-      await agent.ai("点击Solitaire游戏");
-      await agent.ai("等待游戏加载完成");
-      await agent.ai("完成当前局");
+      await agent.ai('Click Game Tab');
+      await agent.ai('Click Solitaire game');
+      await agent.ai('Wait for game to load');
+      await agent.ai('Complete current round');
     });
   },
   360 * 1000,

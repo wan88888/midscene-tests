@@ -17,13 +17,13 @@ describe(
       });
 
       await agent.launch('');
-      await agent.ai('点击Allow all');
-      await agent.ai('点击视频列表第1个视频');
-      await agent.ai('点击Skip');
-      await agent.ai('点击空白位置');
-      await agent.ai('点击下一个视频');
-      await agent.ai('点击返回按钮');
-      await agent.ai('关闭评星弹窗');
+      await agent.ai('Click Allow all');
+      await agent.ai('Click the 1st video in the video list');
+      await agent.ai('Click Skip');
+      await agent.ai('Click blank area');
+      await agent.ai('Click next video');
+      await agent.ai('Click the back button');
+      await agent.ai('Close rating popup');
     });
   },
   360 * 1000,

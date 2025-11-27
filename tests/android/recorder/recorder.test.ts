@@ -17,26 +17,26 @@ describe(
       });
 
       await agent.launch('');
-      await agent.ai('点击Audio');
-      await agent.ai('点击Internal Audio and Microphone');
-      await agent.ai('点击返回按钮');
-      await agent.ai('点击Video');
-      await agent.ai('点击Resolution');
-      await agent.ai('点击1080P选项');
-      await agent.ai('点击Quality');
-      await agent.ai('点击Excellent Quality');
-      await agent.ai('点击FPS');
-      await agent.ai('点击120FPS选项');
-      await agent.ai('点击返回按钮');
-      await agent.ai('点击中间录制按钮');
-      await agent.ai('点击Start now');
-      await agent.ai('下拉通知栏');
+      await agent.ai('Click Audio');
+      await agent.ai('Click Internal Audio and Microphone');
+      await agent.ai('Click the back button');
+      await agent.ai('Click Video');
+      await agent.ai('Click Resolution');
+      await agent.ai('Click 1080P option');
+      await agent.ai('Click Quality');
+      await agent.ai('Click Excellent Quality');
+      await agent.ai('Click FPS');
+      await agent.ai('Click 120FPS option');
+      await agent.ai('Click the back button');
+      await agent.ai('Click the middle record button');
+      await agent.ai('Click Start now');
+      await agent.ai('Pull down notification bar');
       await agent.launch('');
       await agent.launch('');
-      await agent.ai('点击第1个视频');
+      await agent.ai('Click the 1st video');
       await agent.launch('');
-      await agent.ai('点击结束录制按钮');
-      await agent.ai('点击结果页关闭按钮');
+      await agent.ai('Click the end recording button');
+      await agent.ai('Click the close button on result page');
     });
   },
   360 * 1000,

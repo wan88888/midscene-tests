@@ -30,14 +30,14 @@ describe("Test eSIM Select", () => {
     };
   });
 
-  it("ai esim select", async () => {
+  it('ai esim select', async () => {
     await agent.aiScroll({
       direction: 'up',
       distance: 100,
       scrollType: 'once',
     });
-    await agent.ai("Click See all destination");
-    await agent.ai("Click Australia");
-    await agent.ai("Click the Buy button on the page");
+    await agent.ai('Click See all destination');
+    await agent.ai('Click Australia');
+    await agent.ai('Click the Buy button on the page');
   });
 });

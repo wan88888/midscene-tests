@@ -17,12 +17,12 @@ describe(
       });
 
       await agent.launch('');
-      await agent.ai('点击中间键盘按钮');
-      await agent.ai('输入号码6502234107');
-      await agent.ai('点击键盘上的电话按钮');
-      await agent.ai('点击结束通话按钮');
-      await agent.ai('点击返回按钮');
-      await agent.aiAssert('Call界面应该会出现通话记录');
+      await agent.ai('Click the middle keyboard button');
+      await agent.ai('Enter phone number 6502234107');
+      await agent.ai('Click the phone button on the keyboard');
+      await agent.ai('Click the end call button');
+      await agent.ai('Click the back button');
+      await agent.aiAssert('Call history should appear in Call interface');
     });
   },
   360 * 1000,
