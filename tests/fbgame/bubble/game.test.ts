@@ -26,10 +26,12 @@ describe(
 
       await agent.launch(process.env.ANDROID_FACEBOOK_PACKAGE || '');
       await sleep(3000);
-      await agent.ai('Click Game Tab');
-      await agent.ai('Click Bubble Shooter game');
-      await agent.ai('Wait for game to load');
-      await agent.ai('Complete current round');
+      await agent.ai('点击游戏icon');
+      await sleep(3000);
+      await agent.ai('Click Newford City');
+      await sleep(20000);
+      await agent.ai('点击Play按钮');
+      await agent.ai('找到两幅图所有不同的地方');
     });
   },
   360 * 1000,

@@ -199,11 +199,9 @@ npm run test:cache
 ```bash
 # Android 应用包名
 ANDROID_SAUCE_PACKAGE=com.swaglabsmobileapp/com.swaglabsmobileapp.MainActivity
-ANDROID_EDITOR_PACKAGE=vidma.video.editor.videomaker/com.atlasv.android.mvmaker.mveditor.LaunchActivity
 
 # iOS Bundle ID
 IOS_MAIL_BUNDLE_ID=com.apple.mobilemail
-IOS_EDITOR_BUNDLE_ID=your.app.bundle.id
 
 # 飞书 Webhook（可选）
 FEISHU_WEBHOOK=https://open.feishu.cn/open-apis/bot/v2/hook/your-webhook-url
