@@ -6,7 +6,7 @@ vi.setConfig({
   testTimeout: 90 * 1000,
 });
 
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
 
 describe(
   'android integration',
