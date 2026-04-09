@@ -9,4 +9,3 @@ export default defineConfig({
     globalSetup: './scripts/global-setup.ts'
   }
 });
-
