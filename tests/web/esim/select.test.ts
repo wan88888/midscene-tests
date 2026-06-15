@@ -1,6 +1,6 @@
 import { describe, it, vi, beforeAll, afterAll } from 'vitest';
-import { chromium, Browser } from 'playwright';
 import { PlaywrightAgent } from '@midscene/web/playwright';
+import { launchAdsPower, type AdsPowerSession } from '../../helpers/adspower';
 import 'dotenv/config';
 
 vi.setConfig({
@@ -11,25 +11,19 @@ vi.setConfig({
 const pageUrl = 'https://esimnum.com/home';
 
 describe('Web eSIM Tests', () => {
-  let browser: Browser;
+  let session: AdsPowerSession;
   let agent: PlaywrightAgent;
 
   beforeAll(async () => {
-    browser = await chromium.launch({
-      headless: false,
-      args: ['--start-maximized'],
+    session = await launchAdsPower({
+      pageUrl,
+      userId: process.env.ADSPOWER_ESIM_USER_ID,
     });
-    const context = await browser.newContext({
-      viewport: null,
-    });
-    const page = await context.newPage();
-    await page.goto(pageUrl);
-    await page.waitForLoadState('networkidle');
-    agent = new PlaywrightAgent(page);
+    agent = session.agent;
   });
 
   afterAll(async () => {
-    await browser?.close();
+    await session?.cleanup();
   });
 
   it('should select destination and buy', async () => {

@@ -1,6 +1,6 @@
 import { describe, it, vi, beforeAll, afterAll } from 'vitest';
-import { chromium, Browser } from 'playwright';
 import { PlaywrightAgent } from '@midscene/web/playwright';
+import { launchAdsPower, type AdsPowerSession } from '../../helpers/adspower';
 import 'dotenv/config';
 
 vi.setConfig({
@@ -32,25 +32,19 @@ async function playLevel(agent: PlaywrightAgent, maxRounds = 5) {
 }
 
 describe('Screw Game Tests', () => {
-  let browser: Browser;
+  let session: AdsPowerSession;
   let agent: PlaywrightAgent;
 
   beforeAll(async () => {
-    browser = await chromium.launch({
-      headless: false,
-      args: ['--start-maximized'],
+    session = await launchAdsPower({
+      pageUrl,
+      userId: process.env.ADSPOWER_FBGAME_USER_ID,
     });
-    const context = await browser.newContext({
-      viewport: null,
-    });
-    const page = await context.newPage();
-    await page.goto(pageUrl);
-    await page.waitForLoadState('networkidle');
-    agent = new PlaywrightAgent(page);
+    agent = session.agent;
   });
 
   afterAll(async () => {
-    await browser?.close();
+    await session?.cleanup();
   });
 
   const levels = ['Level guide', ...Array.from({ length: 1 }, (_, i) => `Level ${i + 1}`)];
