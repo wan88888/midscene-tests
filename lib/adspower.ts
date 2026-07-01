@@ -6,7 +6,8 @@ const API = process.env.ADSPOWER_API_URL?.replace(/\/$/, '') || 'http://local.ad
 
 export interface AdsPowerOptions {
   userId?: string;
-  pageUrl: string;
+  /** 不传则只连接浏览器，不跳转（适合同一会话内测多个 URL） */
+  pageUrl?: string;
   aiActionContext?: string;
   /** 设为 true 时测试结束关闭浏览器（默认保留窗口供下次复用） */
   stopOnCleanup?: boolean;
@@ -60,7 +61,9 @@ export async function launchAdsPower(options: AdsPowerOptions): Promise<AdsPower
   const context = browser.contexts()[0] ?? (await browser.newContext());
   const page = context.pages()[0] ?? (await context.newPage());
   await page.bringToFront().catch(() => {});
-  await page.goto(options.pageUrl, { waitUntil: 'load', timeout: 60_000 });
+  if (options.pageUrl) {
+    await page.goto(options.pageUrl, { waitUntil: 'load', timeout: 60_000 });
+  }
 
   const agent = new PlaywrightAgent(
     page,
