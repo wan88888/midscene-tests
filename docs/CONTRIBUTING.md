@@ -49,13 +49,20 @@ git commit -m "添加功能 X 的测试"
 ### 目录组织
 
 ```
+lib/                  # 与业务无关的通用代码
+└── adspower.ts       # AdsPower 浏览器连接
+
 tests/
 ├── android/          # Android 应用测试
 │   ├── app-name/     # 按应用分组
+│   │   ├── flow.ts           # 业务相关、可复用的步骤（可选）
 │   │   ├── feature1.test.ts
 │   │   └── feature2.test.ts
 ├── ios/              # iOS 应用测试
 ├── web/              # Web 测试
+│   └── esim/
+│       ├── purchase-flow.ts  # eSIM 购买流程步骤
+│       └── *.test.ts
 └── fbgame/           # Facebook 游戏测试
 
 scripts/              # 工具脚本
@@ -65,6 +72,12 @@ scripts/              # 工具脚本
 docs/                 # 文档
 └── *.md
 ```
+
+### 代码放置约定
+
+- **`lib/`**：与业务无关、跨平台/跨业务复用的基础设施（如浏览器连接、通用工具）。
+- **`tests/{平台}/{业务}/`**：与具体业务相关、但在同业务多个用例间复用的代码（如购买流程步骤、登录前置步骤）。与用例放在同一目录，用相对路径 `./purchase-flow` 引用。
+- **不要**把业务步骤放进 `lib/`；**不要**把通用基础设施放进某个业务的测试目录。
 
 ### 添加新测试
 
@@ -185,8 +198,8 @@ ANDROID_MYAPP_PACKAGE=com.example.myapp/com.example.myapp.MainActivity
 // ✅ 好的
 import { agentFromAdbDevice, getConnectedDevices } from '@midscene/android';
 import { describe, it, vi } from 'vitest';
-import path from 'path';
-import { myHelper } from '../helpers/myHelper';
+import { launchAdsPower } from '@lib/adspower';
+import { runPurchaseFlow } from './purchase-flow';
 import 'dotenv/config';
 ```
 

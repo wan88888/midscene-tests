@@ -61,6 +61,7 @@ midscene-tests/
 │   └── fbgame/            # Facebook 游戏测试
 │       ├── bubble/        # 泡泡射击游戏
 │       └── solitaire/     # 纸牌游戏
+├── lib/                   # 与业务无关的通用代码（如 AdsPower 连接）
 ├── scripts/
 │   ├── global-setup.ts           # 测试后钩子
 │   └── send-feishu-report.ts     # 报告通知
@@ -73,6 +74,14 @@ midscene-tests/
 ├── package.json          # 依赖和脚本
 └── vitest.config.ts      # 测试配置
 ```
+
+**代码放置约定：**
+
+| 类型 | 位置 | 示例 |
+|------|------|------|
+| 与业务无关的通用代码 | `lib/` | `lib/adspower.ts` |
+| 与业务相关、可复用的步骤/辅助 | `tests/{平台}/{业务}/` | `tests/web/esim/purchase-flow.ts` |
+| 具体测试用例 | `tests/{平台}/{业务}/*.test.ts` | `purchase-flow.dev.test.ts` |
 
 ---
 
