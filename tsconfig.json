@@ -11,7 +11,11 @@
     "isolatedModules": true,
     "noEmit": true,
     "types": ["node", "vitest/globals"],
-    
+    "baseUrl": ".",
+    "paths": {
+      "@lib/*": ["lib/*"]
+    },
+
     // 关键配置：不对数组索引访问做额外的 undefined 检查
     // 这样 devices[0].udid 不会报错
     "noUncheckedIndexedAccess": false

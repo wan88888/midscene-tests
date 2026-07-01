@@ -1,6 +1,6 @@
 import { describe, it, vi, beforeAll, afterAll } from 'vitest';
 import { PlaywrightAgent } from '@midscene/web/playwright';
-import { launchAdsPower, type AdsPowerSession } from '../../helpers/adspower';
+import { launchAdsPower, type AdsPowerSession } from '@lib/adspower';
 import 'dotenv/config';
 
 vi.setConfig({

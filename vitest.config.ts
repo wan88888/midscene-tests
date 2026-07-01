@@ -1,6 +1,15 @@
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { defineConfig } from 'vitest/config';
 
+const root = path.dirname(fileURLToPath(import.meta.url));
+
 export default defineConfig({
+  resolve: {
+    alias: {
+      '@lib': path.resolve(root, 'lib'),
+    },
+  },
   test: {
     // 全局设置
     globals: true,
