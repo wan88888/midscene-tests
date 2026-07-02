@@ -3,11 +3,9 @@ import path from 'path';
 import https from 'https';
 import http from 'http';
 import { fileURLToPath } from 'url';
-import { exec } from 'child_process';
-import { promisify } from 'util';
+import { S3Client, PutObjectCommand, GetObjectCommand } from '@aws-sdk/client-s3';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import 'dotenv/config';
-
-const execAsync = promisify(exec);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -41,89 +39,118 @@ interface FeishuMessageCard {
   };
 }
 
-// 使用 Surge 托管（推荐 - 免费、简单、快速）
-async function uploadToSurge(reportPath: string): Promise<string | null> {
-  try {
-    const fileName = path.basename(reportPath);
-    const timestamp = Date.now();
-    
-    // 使用环境变量自定义域名，或使用随机生成的域名
-    const customDomain = process.env.SURGE_DOMAIN;
-    const domain = customDomain || `midscene-report-${timestamp}`;
-    
-    // 创建临时目录用于 Surge 部署
-    const tempDir = path.join(__dirname, '../.surge-temp');
-    if (!fs.existsSync(tempDir)) {
-      fs.mkdirSync(tempDir, { recursive: true });
-    }
-    
-    // 复制报告文件到临时目录并重命名为 index.html
-    // 这样访问域名时就直接显示报告
-    const destPath = path.join(tempDir, 'index.html');
-    fs.copyFileSync(reportPath, destPath);
-    
-    // 同时保留原文件名的副本，方便直接访问
-    const originalNamePath = path.join(tempDir, fileName);
-    if (originalNamePath !== destPath) {
-      fs.copyFileSync(reportPath, originalNamePath);
-    }
-    
-    console.log('Uploading report to Surge...');
-    
-    // 执行 surge 命令
-    // --project: 指定要上传的目录
-    // --domain: 指定域名
-    const surgeCmd = `npx surge --project "${tempDir}" --domain "${domain}.surge.sh"`;
-    const { stdout, stderr } = await execAsync(surgeCmd, {
-      env: {
-        ...process.env,
-        // Surge 需要这些环境变量来自动登录
-        SURGE_LOGIN: process.env.SURGE_EMAIL || '',
-        SURGE_TOKEN: process.env.SURGE_TOKEN || '',
-      }
-    });
-    
-    // 清理临时目录
-    try {
-      fs.rmSync(tempDir, { recursive: true, force: true });
-    } catch (e) {
-      // 忽略清理错误
-    }
-    
-    const url = `https://${domain}.surge.sh`;
-    console.log(`✓ Report uploaded to Surge: ${url}`);
-    console.log(`✓ Report is publicly accessible and will remain online`);
-    
-    return url;
-  } catch (error: any) {
-    console.error('Failed to upload to Surge:', error?.message || error);
-    
-    // 如果是因为未登录，给出提示
-    if (error?.message?.includes('Not Authorized') || error?.message?.includes('login')) {
-      console.log('\n💡 Surge requires login. Run the following commands:');
-      console.log('   1. npx surge login');
-      console.log('   2. Or set SURGE_EMAIL and SURGE_TOKEN in .env file\n');
-    }
-    
+function getSpacesClient(): S3Client | null {
+  const accessKeyId = process.env.DO_SPACES_KEY;
+  const secretAccessKey = process.env.DO_SPACES_SECRET;
+  const region = process.env.DO_SPACES_REGION;
+
+  if (!accessKeyId || !secretAccessKey || !region) {
+    console.log('⚠ DigitalOcean Spaces not configured. Set DO_SPACES_KEY, DO_SPACES_SECRET, and DO_SPACES_REGION in .env');
     return null;
+  }
+
+  return new S3Client({
+    endpoint: `https://${region}.digitaloceanspaces.com`,
+    region: 'us-east-1',
+    credentials: { accessKeyId, secretAccessKey },
+    forcePathStyle: false,
+  });
+}
+
+function getPublicObjectUrl(bucket: string, region: string, objectKey: string): string {
+  const cdnEnabled = process.env.DO_SPACES_CDN === 'true';
+  const host = cdnEnabled
+    ? `${bucket}.${region}.cdn.digitaloceanspaces.com`
+    : `${bucket}.${region}.digitaloceanspaces.com`;
+  return `https://${host}/${objectKey}`;
+}
+
+async function uploadToDigitalOceanSpaces(reportPath: string): Promise<string | null> {
+  const client = getSpacesClient();
+  if (!client) {
+    return null;
+  }
+
+  const bucket = process.env.DO_SPACES_BUCKET;
+  if (!bucket) {
+    console.log('⚠ DO_SPACES_BUCKET not configured in .env');
+    return null;
+  }
+
+  const region = process.env.DO_SPACES_REGION!;
+  const prefix = (process.env.DO_SPACES_PREFIX || 'reports/').replace(/\/?$/, '/');
+  const fileName = path.basename(reportPath);
+  const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+  const objectKey = `${prefix}${timestamp}-${fileName}`;
+
+  try {
+    const body = fs.readFileSync(reportPath);
+
+    console.log(`Uploading report to DigitalOcean Spaces (${bucket})...`);
+
+    await client.send(
+      new PutObjectCommand({
+        Bucket: bucket,
+        Key: objectKey,
+        Body: body,
+        ContentType: 'text/html; charset=utf-8',
+        ACL: 'public-read',
+      }),
+    );
+
+    const publicUrl = getPublicObjectUrl(bucket, region, objectKey);
+    console.log(`✓ Report uploaded to DigitalOcean Spaces: ${publicUrl}`);
+    return publicUrl;
+  } catch (error: any) {
+    const aclNotSupported =
+      error?.name === 'AccessControlListNotSupported' ||
+      error?.Code === 'AccessControlListNotSupported' ||
+      error?.message?.includes('AccessControlListNotSupported');
+
+    if (!aclNotSupported) {
+      console.error('Failed to upload to DigitalOcean Spaces:', error?.message || error);
+      return null;
+    }
+
+    try {
+      await client.send(
+        new PutObjectCommand({
+          Bucket: bucket,
+          Key: objectKey,
+          Body: fs.readFileSync(reportPath),
+          ContentType: 'text/html; charset=utf-8',
+        }),
+      );
+
+      const expiresIn = Number(process.env.DO_SPACES_URL_EXPIRES_IN || 7 * 24 * 60 * 60);
+      const signedUrl = await getSignedUrl(
+        client,
+        new GetObjectCommand({ Bucket: bucket, Key: objectKey }),
+        { expiresIn },
+      );
+
+      console.log(`✓ Report uploaded to DigitalOcean Spaces (signed URL, ${expiresIn}s): ${signedUrl}`);
+      return signedUrl;
+    } catch (retryError: any) {
+      console.error('Failed to upload to DigitalOcean Spaces:', retryError?.message || retryError);
+      return null;
+    }
   }
 }
 
 async function uploadReportToServer(reportPath: string): Promise<string | null> {
-  // 使用 Surge 上传报告
-  const surgeUrl = await uploadToSurge(reportPath);
-  
-  if (!surgeUrl) {
-    console.log('⚠ Surge upload failed. Please run "npx surge login" first.');
-    console.log('⚠ Report will only show local path in notification.');
+  const reportUrl = await uploadToDigitalOceanSpaces(reportPath);
+
+  if (!reportUrl) {
+    console.log('⚠ DigitalOcean Spaces upload failed. Report will only show local path in notification.');
   }
-  
-  return surgeUrl;
+
+  return reportUrl;
 }
 
 function getLatestReport(): string | null {
   const reportDir = path.join(__dirname, '../midscene_run/report');
-  
+
   if (!fs.existsSync(reportDir)) {
     console.log('Report directory not found');
     return null;
@@ -204,8 +231,7 @@ async function main() {
 
   const reportName = path.basename(reportPath);
   const reportUrl = await uploadReportToServer(reportPath);
-  
-  // 构建飞书消息
+
   const message: FeishuMessageCard = {
     msg_type: 'interactive',
     card: {
@@ -228,7 +254,6 @@ async function main() {
     }
   };
 
-  // 如果有报告URL，添加查看按钮
   if (reportUrl) {
     message.card.elements.push({
       tag: 'action',
@@ -245,11 +270,10 @@ async function main() {
       ]
     });
   } else {
-    // 没有URL时显示本地路径和配置提示
     message.card.elements.push({
       tag: 'div',
       text: {
-        content: `**本地路径:** \`${reportPath}\`\n\n💡 配置 Surge 后可生成在线链接`,
+        content: `**本地路径:** \`${reportPath}\`\n\n💡 配置 DigitalOcean Spaces 后可生成在线链接`,
         tag: 'lark_md'
       }
     });
@@ -264,4 +288,3 @@ async function main() {
 }
 
 main();
-

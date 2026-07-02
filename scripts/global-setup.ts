@@ -7,7 +7,7 @@ import 'dotenv/config';
 const execAsync = promisify(exec);
 
 // 使用文件锁防止重复发送
-const lockFile = path.join(process.cwd(), '.surge-send-lock');
+const lockFile = path.join(process.cwd(), '.report-send-lock');
 let hasRun = false;
 
 export default async function globalSetup() {
